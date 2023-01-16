@@ -1,0 +1,56 @@
+{% extends 'home.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+<style>
+  table, th, td {
+    border: 1px solid black;
+  }
+  </style>
+
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center bg-info my-4">REGISTER</h1>
+      <div class="col-md-12 my-4">
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form|crispy }} <br><br>
+          
+
+
+          <input type="submit" class="  btn btn-outline-success form-control mb-2 my-2" value="submit" >
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <table border="2px solid black" class="table">
+      <thead>
+      <tr>
+          <th>Student Id</th>
+          <th>Student Name</th>
+          <th>Student Address</th>
+          <th>Student Phone</th>
+          <th><i class="fa fa-trash"></i></th>
+          <th><i class="fa fa-refresh"></i</th>
+        </thead>
+      </tr>
+
+      <tr>
+        {% for i in a %}
+
+        <td>#</td>
+        <td>{{ i.student_name}}</td>
+        <td>{{ i.student_address}}</td>
+        <td>{{ i.student_phone}}</td>
+        
+        <td><a href="{% url 'delete' i.id %}" class="btn btn-danger">Delete</a></td>
+        <td><a href="{% url 'update' i.id %}" class="btn btn-success">Update</a></td>
+      </tr>
+      {% endfor %}
+  </div>
+  {% endblock %}
